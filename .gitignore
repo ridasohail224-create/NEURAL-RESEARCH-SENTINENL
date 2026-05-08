@@ -1,0 +1,28 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Dependencies
+node_modules/
+backend/__pycache__/
+frontend/dist/
+frontend/node_modules/
+
+# Databases & Data
+backend/uploads/*
+!backend/uploads/.gitkeep
+data/
+backend/data/
+*.db
+*.sqlite3
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
