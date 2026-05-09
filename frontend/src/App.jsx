@@ -6,6 +6,8 @@ import IntegrityGauge from './components/IntegrityGauge'
 import RecentScans from './components/RecentScans'
 import PremiumFeatures from './components/PremiumFeatures'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 function App() {
   const [analysisResult, setAnalysisResult] = useState(null)
   const [isScanning, setIsScanning] = useState(false)
@@ -23,7 +25,7 @@ function App() {
       const formData = new FormData()
       formData.append('file', file)
       
-      const uploadRes = await fetch('http://localhost:8000/api/upload', {
+      const uploadRes = await fetch(`${API_URL}/api/upload`, {
         method: 'POST',
         body: formData,
       })
@@ -35,7 +37,7 @@ function App() {
       const { filename } = await uploadRes.json()
       
       // 2. Analyze Content
-      const analyzeRes = await fetch('http://localhost:8000/api/analyze', {
+      const analyzeRes = await fetch(`${API_URL}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

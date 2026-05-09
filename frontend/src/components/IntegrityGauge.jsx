@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { ShieldAlert, CheckCircle, AlertTriangle, XCircle, FileWarning, ExternalLink } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 export default function IntegrityGauge({ result, isScanning }) {
   if (isScanning) {
     return (
@@ -55,7 +57,7 @@ export default function IntegrityGauge({ result, isScanning }) {
         </h2>
         {result.filename && (
           <a 
-            href={`http://localhost:8000/uploads/${encodeURIComponent(result.filename)}`}
+            href={`${API_URL}/uploads/${encodeURIComponent(result.filename)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-mono text-cyber-neon hover:text-white transition-colors flex items-center gap-1 border border-cyber-neon/30 px-2 py-1 rounded"

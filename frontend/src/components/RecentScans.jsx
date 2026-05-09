@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Database, ExternalLink, CheckCircle, AlertTriangle, XCircle, Loader2 } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 export default function RecentScans() {
   const [scans, setScans] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/recent-scans')
+    fetch(`${API_URL}/api/recent-scans`)
       .then(res => res.json())
       .then(data => {
         setScans(data)
@@ -54,7 +56,7 @@ export default function RecentScans() {
                 <td className="py-4 px-4 font-mono text-sm text-gray-400 whitespace-nowrap">{scan.timestamp}</td>
                 <td className="py-4 px-4 font-mono text-sm text-gray-200">
                   <a 
-                    href={`http://localhost:8000/uploads/${encodeURIComponent(scan.filename)}`}
+                    href={`${API_URL}/uploads/${encodeURIComponent(scan.filename)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-cyber-neon transition-colors"
@@ -77,7 +79,7 @@ export default function RecentScans() {
                 </td>
                 <td className="py-4 px-4 text-right">
                   <a 
-                    href={`http://localhost:8000/uploads/${encodeURIComponent(scan.filename)}`}
+                    href={`${API_URL}/uploads/${encodeURIComponent(scan.filename)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyber-neon hover:text-white transition-colors inline-block"
