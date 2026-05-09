@@ -6,7 +6,7 @@ import IntegrityGauge from './components/IntegrityGauge'
 import RecentScans from './components/RecentScans'
 import PremiumFeatures from './components/PremiumFeatures'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 function App() {
   const [analysisResult, setAnalysisResult] = useState(null)

@@ -152,3 +152,7 @@ async def get_recent_scans_api():
     except Exception as e:
         print(f"Error fetching recent scans: {e}")
         return []
+
+# Serve static files for frontend (Must be at the very end)
+if os.path.exists("static"):
+    app.mount("/", StaticFiles(directory="static", html=True), name="static")
