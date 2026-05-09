@@ -1,0 +1,29 @@
+services:
+  # Backend Service
+  - type: web
+    name: sentinel-backend
+    env: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false # You will enter this in the Render dashboard
+      - key: MONGO_URI
+        sync: false # You can use MongoDB Atlas or a local JSON fallback
+
+  # Frontend Service
+  - type: web
+    name: sentinel-frontend
+    env: static
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: sentinel-backend
+          type: web
+          property: host
