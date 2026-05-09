@@ -136,10 +136,42 @@ if 'last_result' in st.session_state:
         ver = res.get('verification', {})
         st.write(f"**Paper found in scholarly databases:** {'✅ Yes' if ver.get('paper_exists') else '❌ No'}")
         st.write(f"**Author verification status:** {'✅ Match' if ver.get('author_match') else '❌ Mismatch'}")
+        st.write(f"**Publication year match:** {'✅ Match' if ver.get('year_match') else '❌ Mismatch'}")
         st.write(f"**Source count:** {len(ver.get('sources', {}))}")
-        
+
+        # Per-factor confidence + score explanations
+        halluc = res.get("hallucination", {})
+        factor_confidences = halluc.get("factor_confidences", {})
+        thresholds = halluc.get("thresholds", {})
+
+        st.markdown("---")
+        st.subheader("Why this score was assigned")
+
+        weights = halluc.get("weights", {})
+        explanations = halluc.get("explanations", [])
+        if explanations:
+            for item in explanations:
+                st.write(f"- {item}")
+        else:
+            st.write("No specific explanations returned.")
+
+        # Confidence table
+        st.write("")
+        st.write("**Confidence scores (higher = more suspicious):**")
+        for k in ["paper_exists", "author_match", "year_match", "fake_references", "pasted_response"]:
+            if k in factor_confidences:
+                w = weights.get(k)
+                st.write(f"- {k}: {factor_confidences.get(k, 0):.1f}%" + (f" (weight={w})" if w is not None else ""))
+
+        if thresholds:
+            st.write("")
+            st.write("**Verdict thresholds:**")
+            st.write(f"- REAL_MAX: {thresholds.get('REAL_MAX')}")
+            st.write(f"- SUSPICIOUS_MAX: {thresholds.get('SUSPICIOUS_MAX')}")
+
     # Full Raw Data (Optional for advanced users)
     with st.expander("View Raw Forensic Data"):
         st.json(res)
 else:
     st.info("System Ready. Please upload a file to begin.")
+
