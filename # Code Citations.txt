@@ -1,0 +1,81 @@
+# Code Citations
+
+## License: unknown
+https://github.com/yachmennikov/node-auth/tree/5d57a44f58b59beed36d06610af2b693600b54aa/local-strategy-2/UserModel.js
+
+```
+= require('mongoose');
+
+const UserSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+});
+
+module.exports = mongoose.model('User'
+```
+
+
+## License: unknown
+https://github.com/kabilansakthivelu/email-dashboard/tree/1fc02169d3b306006c681fbf09df81b60470237e/src/App.js
+
+```
+() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
+  )
+```
+
+
+## License: unknown
+https://github.com/KNagaPrasad/MotorVehicle/tree/4d43b81ade446da17d4bebdd8400e74e76ad67e7/src/pages/Login.js
+
+```
+Login.js
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('
+```
+
+
+## License: unknown
+https://github.com/SWEP-Speedoku/frontend/tree/c9201a5106c2b0302dfbb00b8b8a13ee02028a90/src/components/Login.jsx
+
+```
+from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate()
+```
+
+
+## License: unknown
+https://github.com/zeynep-baydemir/Introduction-to-Database-Systems/tree/d7e8b2411a7cf7c35e95c8c7feff1e3b93f5bef0/project3/frontend/src/components/dbManager.js
+
+```
+}
+  };
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type
+```
+
