@@ -18,4 +18,6 @@ faiss-cpu
 spacy
 sentence-transformers
 python-docx
+streamlit
+requests
 numpy
