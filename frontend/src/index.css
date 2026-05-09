@@ -3,20 +3,47 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg0: #0a0a0f;
+    --bg1: #0d0d16;
+    --card: rgba(18, 18, 26, 0.6);
+    --text: #e2e8f0;
+    --muted: rgba(226, 232, 240, 0.7);
+    --scrollTrack: #0a0a0f;
+    --glassBorder: rgba(0, 240, 255, 0.15);
+    --glassShadow: rgba(0, 0, 0, 0.5);
+  }
+
+  :root[data-theme='light'] {
+    --bg0: #f7fbff;
+    --bg1: #eaf4ff;
+    --card: rgba(255, 255, 255, 0.65);
+    --text: #08111a;
+    --muted: rgba(8, 17, 26, 0.65);
+    --scrollTrack: #e9f2ff;
+    --glassBorder: rgba(0, 195, 255, 0.25);
+    --glassShadow: rgba(0, 0, 0, 0.12);
+  }
+
   body {
-    background: radial-gradient(circle at top right, #0d0d16, #0a0a0f);
-    color: #e2e8f0;
+    background: radial-gradient(circle at top right, var(--bg1), var(--bg0));
+    color: var(--text);
     font-family: 'Inter', sans-serif;
   }
 }
 
+html[data-theme='light'] * {
+  --tw-ring-color: rgba(0, 240, 255, 0.5);
+}
+
+
 @layer utilities {
   .glass-card {
-    background: rgba(18, 18, 26, 0.6);
+    background: var(--card);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 240, 255, 0.15);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--glassBorder);
+    box-shadow: 0 4px 30px var(--glassShadow);
   }
   
   .neon-text {
@@ -34,7 +61,7 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0f;
+  background: var(--scrollTrack);
 }
 ::-webkit-scrollbar-thumb {
   background: #00f0ff;
@@ -43,3 +70,4 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #00c3ff;
 }
+
