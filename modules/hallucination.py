@@ -95,10 +95,12 @@ def compute_hallucination_score(
             )
             factor_confidences["pasted_response"] = 100.0
         else:
-            factor_confidences["pasted_response"] = 10.0
+            # length heuristic indicates some mismatch, but keep contribution modest
+            score += weights["pasted_response"] * 0.5
+            factor_confidences["pasted_response"] = 50.0
     else:
-        # No evidence => neutral confidence (low suspicion)
-        factor_confidences["pasted_response"] = 5.0
+        # No evidence => contribute 0 to suspiciousness.
+        factor_confidences["pasted_response"] = 0.0
 
     score = min(score, 100)
 

@@ -64,11 +64,17 @@ if st.button("RUN FORENSIC ANALYSIS", type="primary"):
                     
                     # 2. Analyze Content
                     st.write("Analyzing for hallucinations and AI fabrications...")
-                    an_res = requests.post(f"{backend_url}/api/analyze", json={
-                        "filename": filename,
-                        "query": query,
-                        "response": "Automated Analysis Request"
-                    })
+                    # IMPORTANT: use the actual AI response text (if provided) rather than a placeholder.
+                    # If the user did not provide AI text, send an empty string so the scorer has no pasted-response evidence.
+                    ai_response = st.session_state.get("ai_response", "") if "ai_response" in st.session_state else ""
+                    an_res = requests.post(
+                        f"{backend_url}/api/analyze",
+                        json={
+                            "filename": filename,
+                            "query": query,
+                            "response": ai_response,
+                        },
+                    )
                     
                     if an_res.status_code == 200:
                         st.session_state.last_result = an_res.json()
