@@ -21,8 +21,9 @@ COPY backend/ .
 # Copy frontend build to a static directory in backend
 COPY --from=frontend-build /frontend/dist /app/static
 
-# Expose Hugging Face default port
-EXPOSE 7860
+# Expose backend port
+EXPOSE 8000
 
 # Command to run FastAPI and serve static files
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
