@@ -41,7 +41,11 @@ def analyze_document(file_obj) -> Dict[str, Any]:
         "hallucination_score": hallucination.get("hallucination_score"),
         "verdict": verdict,
         "suspicious_sections": suspicious_sections,
+        # Pass-through fields for UI/debugging
+        "explanations": hallucination.get("explanations"),
+        "factor_confidences": hallucination.get("factor_confidences"),
     }
+
 
 
     # Optional: store embeddings for future retrieval (best-effort)
